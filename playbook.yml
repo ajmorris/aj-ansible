@@ -1,6 +1,6 @@
 ---
-- hosts: digitaloceanservers
-  remote_user: root
+- hosts: all
+  connection: local
   sudo: yes
 
   roles:
