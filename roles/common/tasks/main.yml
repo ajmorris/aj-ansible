@@ -38,4 +38,9 @@
   run_once: true
   lineinfile: dest=/root/.profile line="tty -s && mesg n"
 
+- name: Move scripts to bin location
+  run_once: true
+  sudo: true
+  copy: src=/usr/local/bin/* dest=/usr/local/bin/ mode=755
+
 - include: swap.yml

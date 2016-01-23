@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+id -u $USERNAME &>/dev/null || adduser $USERNAME --disabled-password --gecos '{sitename}'
+
+# create database and grants
+echo "create database $USERNAME" | mysql
+echo "grant all privileges on $USERNAME.* to $USERNAME@localhost identified by '$PASSWORD'" | mysql
+echo "[Client]\r\nuser=$USERNAME\r\npassword=$PASSWORD" > ~$USERNAME/.my.cnf
+chmod 600 ~$USERNAME/.my.cnf
+
+# add ssh key
+mkdir -p ~$USERNAME/.ssh && echo '{key}' > ~$USERNAME/.ssh/authorized_keys
+chmod 600 ~$USERNAME/.ssh/authorized_keys
+
+chown -R $USERNAME:$USERNAME ~$USERNAME/
