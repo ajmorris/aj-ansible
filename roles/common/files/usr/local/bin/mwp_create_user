@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
 
 id -u $USERNAME &>/dev/null || adduser $USERNAME --disabled-password --gecos '{sitename}'
 
