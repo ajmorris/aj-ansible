@@ -5,7 +5,7 @@ id -u $USERNAME &>/dev/null || adduser $USERNAME --disabled-password --gecos '{s
 # create database and grants
 echo "create database $USERNAME" | mysql
 echo "grant all privileges on $USERNAME.* to $USERNAME@localhost identified by '$PASSWORD'" | mysql
-echo "[Client]\r\nuser=$USERNAME\r\npassword=$PASSWORD" > /home/$USERNAME/.my.cnf
+echo -e "[Client]\r\nuser=$USERNAME\r\npassword=$PASSWORD" > /home/$USERNAME/.my.cnf
 chmod 600 /home/$USERNAME/.my.cnf
 
 # add ssh key
